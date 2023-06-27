@@ -12,6 +12,12 @@ export enum OpenAIModelID {
   GPT_3_5_AZ = 'gpt-35-turbo',
   GPT_4 = 'gpt-4',
   GPT_4_32K = 'gpt-4-32k',
+
+  // OpenChat
+  OPENCHAT = 'OpenChat',
+  OPENCHAT_8192 = 'OpenChat-8192',
+
+  OPENCODER = 'OpenCoder'
 }
 
 // in case the `DEFAULT_MODEL` environment variable is not set or set to an unsupported model
@@ -41,5 +47,25 @@ export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
     name: 'GPT-4-32K',
     maxLength: 96000,
     tokenLimit: 32000,
+  },
+
+  // OpenChat
+  [OpenAIModelID.OPENCHAT]: {
+    id: OpenAIModelID.OPENCHAT,
+    name: 'OpenChat',
+    maxLength: 6144,
+    tokenLimit: 2048,
+  },
+  [OpenAIModelID.OPENCHAT_8192]: {
+    id: OpenAIModelID.OPENCHAT_8192,
+    name: 'OpenChat-8192',
+    maxLength: 24576,
+    tokenLimit: 8192,
+  },
+  [OpenAIModelID.OPENCODER]: {
+    id: OpenAIModelID.OPENCODER,
+    name: 'OpenCoder',
+    maxLength: 24576,
+    tokenLimit: 8192,
   },
 };
