@@ -8,64 +8,51 @@ export interface OpenAIModel {
 }
 
 export enum OpenAIModelID {
-  GPT_3_5 = 'gpt-3.5-turbo',
-  GPT_3_5_AZ = 'gpt-35-turbo',
-  GPT_4 = 'gpt-4',
-  GPT_4_32K = 'gpt-4-32k',
-
   // OpenChat
   OPENCHAT = 'OpenChat',
   OPENCHAT_8192 = 'OpenChat-8192',
+
+  OPENCHAT3_1 = 'openchat_v3.1_llama2',
+  OPENCHAT3_2 = 'openchat_v3.2',
 
   OPENCODER = 'OpenCoder'
 }
 
 // in case the `DEFAULT_MODEL` environment variable is not set or set to an unsupported model
-export const fallbackModelID = OpenAIModelID.GPT_3_5;
+export const fallbackModelID = OpenAIModelID.OPENCHAT3_2;
 
 export const OpenAIModels: Record<OpenAIModelID, OpenAIModel> = {
-  [OpenAIModelID.GPT_3_5]: {
-    id: OpenAIModelID.GPT_3_5,
-    name: 'GPT-3.5',
-    maxLength: 12000,
-    tokenLimit: 4000,
-  },
-  [OpenAIModelID.GPT_3_5_AZ]: {
-    id: OpenAIModelID.GPT_3_5_AZ,
-    name: 'GPT-3.5',
-    maxLength: 12000,
-    tokenLimit: 4000,
-  },
-  [OpenAIModelID.GPT_4]: {
-    id: OpenAIModelID.GPT_4,
-    name: 'GPT-4',
-    maxLength: 24000,
-    tokenLimit: 8000,
-  },
-  [OpenAIModelID.GPT_4_32K]: {
-    id: OpenAIModelID.GPT_4_32K,
-    name: 'GPT-4-32K',
-    maxLength: 96000,
-    tokenLimit: 32000,
-  },
-
   // OpenChat
   [OpenAIModelID.OPENCHAT]: {
     id: OpenAIModelID.OPENCHAT,
     name: 'OpenChat',
-    maxLength: 6144,
+    maxLength: 2048 * 3,
     tokenLimit: 2048,
   },
   [OpenAIModelID.OPENCHAT_8192]: {
     id: OpenAIModelID.OPENCHAT_8192,
     name: 'OpenChat-8192',
-    maxLength: 24576,
+    maxLength: 8192 * 3,
     tokenLimit: 8192,
   },
   [OpenAIModelID.OPENCODER]: {
     id: OpenAIModelID.OPENCODER,
     name: 'OpenCoder',
-    maxLength: 24576,
+    maxLength: 8192 * 3,
     tokenLimit: 8192,
+  },
+
+  [OpenAIModelID.OPENCHAT3_1]: {
+    id: OpenAIModelID.OPENCHAT3_1,
+    name: 'OpenChat 3.1',
+    maxLength: 4096 * 3,
+    tokenLimit: 4096,
+  },
+
+  [OpenAIModelID.OPENCHAT3_2]: {
+    id: OpenAIModelID.OPENCHAT3_2,
+    name: 'OpenChat 3.2',
+    maxLength: 4096 * 3,
+    tokenLimit: 4096,
   },
 };
