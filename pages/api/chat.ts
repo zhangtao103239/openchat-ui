@@ -3,13 +3,6 @@ import { OpenAIError, OpenAIStream } from '@/utils/server';
 
 import { ChatBody, Message } from '@/types/chat';
 
-// @ts-expect-error
-global.performance = {
-  now() {
-    return Date.now();
-  }
-};
-
 import llamaTokenizer from 'llama-tokenizer-js';
 
 export const config = {
