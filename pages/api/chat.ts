@@ -1,9 +1,8 @@
 import { DEFAULT_SYSTEM_PROMPT, DEFAULT_TEMPERATURE } from '@/utils/app/const';
 import { OpenAIError, OpenAIStream } from '@/utils/server';
+import { OpenAIModelID, OpenAITokenizers } from '@/types/openai'
 
 import { ChatBody, Message } from '@/types/chat';
-
-import llamaTokenizer from 'llama-tokenizer-js';
 
 export const config = {
   runtime: 'edge',
@@ -23,14 +22,15 @@ const handler = async (req: Request): Promise<Response> => {
       temperatureToUse = DEFAULT_TEMPERATURE;
     }
 
-    const prompt_tokens = llamaTokenizer.encode(promptToSend, false);
+    const tokenizer = OpenAITokenizers[model.id as OpenAIModelID];
+    const prompt_tokens = tokenizer.encode(promptToSend, false);
 
     let tokenCount = prompt_tokens.length;
     let messagesToSend: Message[] = [];
 
     for (let i = messages.length - 1; i >= 0; i--) {
       const message = messages[i];
-      const tokens = llamaTokenizer.encode(message.content, false);
+      const tokens = tokenizer.encode(message.content, false);
 
       if (tokenCount + tokens.length + 768 > model.tokenLimit) {
         break;
